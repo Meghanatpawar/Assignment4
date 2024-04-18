@@ -1,0 +1,353 @@
+Java Assingment 4
+
+
+
+1.Write a Java program that compares two wrapper objects for equality and demonstrates when to use equals() instead of == (try with Integer or Float classes)
+Program-
+package assingment;
+
+public class WrapperClass { //WrapperComparison
+
+		    public static void main(String[] args) {
+		        // Create two Integer objects using the same integer value
+		        Integer n1 = Integer.valueOf(222);
+		        Integer n2 = Integer.valueOf(222);
+
+		        // Create two Integer objects using different integer values
+		        Integer n3 = new Integer(200);
+		        Integer n4 = new Integer(200);
+
+		        // Comparing num1 and num2 using ==
+		        System.out.println("Comparing num1 and num2 with '==': " + (n1 == n2)); // True because of Integer caching
+
+		        // Comparing n1 and n2 using equals()
+		        System.out.println("Comparing num1 and num2 with 'equals()': " + n1.equals(n2)); // True because values are the same
+
+		        // Comparing n3 and n4 using ==
+		        System.out.println("Comparing num3 and num4 with '==': " + (n3 == n4)); // False, different objects
+
+		        // Comparing n3 and n4 using equals()
+		        System.out.println("Comparing num3 and num4 with 'equals()': " + n3.equals(n4)); // True because values are the same
+		    }
+		
+
+	}
+
+
+
+
+2.Write a Java program to remove duplicate characters from a string using StringBuffer.
+progran-
+package assingment;
+
+public class RemoveDuplicatesDemo {
+	public static void main(String[] args) {
+        String input = "Remove duplicate characters from a string using StringBuffer";
+        System.out.println("Original String: " + input);
+        System.out.println("String after removing duplicates: " + removeDuplicates(input));
+    }
+
+public static String removeDuplicates(String input) {
+    StringBuffer stringBuffer = new StringBuffer();
+    for (int i = 0; i < input.length(); i++) {
+        char c = input.charAt(i);
+        if (stringBuffer.indexOf(String.valueOf(c)) == -1) { // Check if char is not already in stringBuffer
+            stringBuffer.append(c); // Append non-duplicate character
+        }
+    }
+    return stringBuffer.toString();
+}
+}
+
+3.Write a Java program to concatenate all elements of a string array efficiently using StringBuilder.
+Program-
+package assingment;
+
+public class ConcatenateStrings {
+
+	    public static void main(String[] args) {
+	        // Example array of strings
+	        String[] input = {"Hello", "World", "from", "Java"};
+
+	        // Method call to concatenate all elements
+	        String result = concatenateArray(input);
+
+	        // Print the concatenated result
+	        System.out.println(result);
+	    }
+
+	    // Method to concatenate all elements of a string array
+	    public static String concatenateArray(String[] array) {
+	        // Creating a StringBuilder for efficient concatenation
+	        StringBuilder stringBuilder = new StringBuilder();
+
+	        // Looping through each element in the string array
+	        for (String element : array) {
+	            stringBuilder.append(element);
+	            stringBuilder.append(" "); // Adding a space between words
+	        }
+
+	        // Convert StringBuilder to String and return
+	        return stringBuilder.toString().trim(); // trim() to remove the last space
+	    }
+	}
+
+
+4.Write a Java method to check if an input string is a palindrome (Use String functions).
+Program-
+package assingment;
+
+public class PalindromeChecker {
+	    
+	    public static boolean isPalindrome(String input) {
+	        
+	        String filtered = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+	       
+	        String reversed = new StringBuilder(filtered).reverse().toString();
+
+	       
+	        return filtered.equals(reversed);
+	    }
+
+	    public static void main(String[] args) {
+	        
+	        System.out.println("Is 'A Fan, a plan' a palindrome? " + isPalindrome("A man, a plan, "));
+	        System.out.println("Is 'Hello' a palindrome? " + isPalindrome("Hello"));
+	        System.out.println("Is 'Samantha' a palindrome? " + isPalindrome("Samantha"));
+	    }
+	}
+
+5.Write a program to calculate the square value of any number given by the user .Add an exception handling block to check whether the user enter letters instead of numbers
+Program-
+package assingment;
+import java.util.Scanner;
+public class SqaureCalculators {
+	
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+	        System.out.print("Enter a number to square: ");
+	        try {
+	           
+	            double number = scanner.nextDouble();
+	            double square = number * number;
+	            System.out.println("The square of " + number + " is " + square);
+	        } catch (Exception e) {
+	            
+	            System.out.println("Characters not allowed, Please enter a valid number....!!!!!!!");
+	        } finally {
+	            
+	            scanner.close();
+	        }
+	    }
+	}
+
+6.Create an integer array of size n and read the elements from the user .Add an exception handling block to print the value at nth position of the array
+Progrma-
+package assingment;
+import java.util.Scanner;
+public class ArrayExample {
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+	        
+	       
+	        System.out.print("Enter the size of the array: ");
+	        int n = scanner.nextInt();
+	        int[] array = new int[n];
+	        System.out.println("Enter " + n + " elements:");
+	        for (int i = 0; i < n; i++) {
+	            array[i] = scanner.nextInt();
+	        }
+	 
+	        try {
+	            
+	            System.out.println("The value at position " + n + " is: " + array[n]);
+	        } catch (ArrayIndexOutOfBoundsException e) {
+	            System.out.println("Array index out of bounds: " + e.getMessage());
+	        } finally {
+	            scanner.close();
+	        }
+	    }
+	}
+
+
+
+7.Write a program to split a string containing two words using StringTokenizer without using hasMoreTokens() method and call nextToken() method three times.Add an exception handling block if necessary.
+Program-
+package assingment;
+import java.util.StringTokenizer;
+public class StringTOokenizerDemo {
+
+	    public static void main(String[] args) {
+	        String input = "Hello World";
+
+	        try {
+	          
+	            StringTokenizer tokenizer = new StringTokenizer(input);
+
+	          
+	            String firstWord = tokenizer.nextToken();  // First call
+	            String secondWord = tokenizer.nextToken(); // Second call
+
+	          
+	            String thirdCall = tokenizer.nextToken();
+
+	            System.out.println("First word: " + firstWord);
+	            System.out.println("Second word: " + secondWord);
+	            System.out.println("Third call result: " + thirdCall);
+	        } catch (Exception e) {
+	           
+	            System.out.println("Exception occurred: " + e.getMessage());
+	        }
+	    
+	}
+}
+
+
+8.Write a JAVA program to create a method that takes a string as input and throws an exception if the string does not contain vowels.
+Program=
+package assingment;
+
+public class VowelsChecker {
+
+	    // Custom exception class
+	    static class NoVowelException extends Exception {
+	        public NoVowelException(String message) {
+	            super(message);
+	        }
+	    }
+	    
+	    public static void checkVowels(String input) throws NoVowelException {
+	        
+	        String lowerInput = input.toLowerCase();
+
+	        if (!lowerInput.matches(".*[aeiou].*")) {
+	           
+	            throw new NoVowelException("No vowels found in the string.");
+	        }
+
+	        
+	        System.out.println("The string contains vowels.");
+	    }
+
+	    public static void main(String[] args) {
+	        try {
+	           
+	            checkVowels("Hello");
+	            checkVowels("Cry"); 
+	        } catch (NoVowelException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+	}
+
+
+9.Write a program that creates a Calculator class.
+The class contains two variables of integer type. Design a constructor that accepts two values as parameter and set those values.
+
+Design four methods named Add(),Subtract(),multiply(),Division() for performing addition,subtraction,multiplication and division of two numbers.
+
+For addition and subtraction,two numbers should be positive.If any negative number is entered then throw an exception in respective methods.
+
+So design an exceptionhandler(ArithmeticException)in Add() and Subtract() methods respectively to check whether any number is negative or not.
+
+For division and multiplication two numbers should not be zero.If zero is entered for any number then throw an exception in respective methods.
+So design an exceptionhandler(ArithmeticException)inmultiply()andDivision()methods respectively to check whether any number is zero or not.
+
+Write a main class and declare four objects of Calculator class.Perform addition(objl),subtraction(obj2),multiply(obj3) and division(obj4) operations for these objects.
+If any non integer values are provided as input; then you should throw an exception(NumberFormatException)and display a message that informs the user of the wrong input before exiting
+Program-
+package assingment;
+
+public class Calculator {
+	    private int a;
+	    private int b;
+
+	    public Calculator(int a, int b) {
+	        this.a = a;
+	        this.b = b;
+	    }
+
+	    public int Add() throws ArithmeticException {
+	        if (a < 0 || b < 0) {
+	            throw new ArithmeticException("Addition error: Both numbers must be positive.");
+	        }
+	        return a + b;
+	    }
+
+	    public int Subtract() throws ArithmeticException {
+	        if (a < 0 || b < 0) {
+	            throw new ArithmeticException("Subtraction error: Both numbers must be positive.");
+	        }
+	        return a - b;
+	    }
+
+	    public int multiply() throws ArithmeticException {
+	        if (a == 0 || b == 0) {
+	            throw new ArithmeticException("Multiplication error: Neither number can be zero.");
+	        }
+	        return a * b;
+	    }
+
+	    public int Division() throws ArithmeticException {
+	        if (a == 0 || b == 0) {
+	            throw new ArithmeticException("Division error: Neither number can be zero.");
+	        }
+	        return a / b;
+	    }
+	}
+
+	
+package assingment;
+
+public class TestCalculator {
+
+	public static void main(String[] args) {
+		try {
+			// Create four objects of Calculator class with valid inputs
+			Calculator obj1 = new Calculator(10, 5);
+			Calculator obj2 = new Calculator(20, 10);
+			Calculator obj3 = new Calculator(15, 3);
+			Calculator obj4 = new Calculator(40, 2);
+
+			// Perform operations
+			System.out.println("Addition: " + obj1.Add());
+			System.out.println("Subtraction: " + obj2.Subtract());
+			System.out.println("Multiplication: " + obj3.multiply());
+			System.out.println("Division: " + obj4.Division());
+
+		} catch (NumberFormatException e) {
+			System.out.println("Input error: Please ensure you enter only integers.");
+		} catch (ArithmeticException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+}
+
+10.Write the Java program that reads an input string and converts it to an integer, handling the exceptions if the input contains non-digits or if the input is larger than what an integer can store:
+Program-
+package assingment;
+import java.util.Scanner;
+public class StringtoInt {
+
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        System.out.println("Please enter a number:");
+	        String input = scanner.nextLine();
+
+	        try {
+	            
+	            int number = Integer.parseInt(input);
+	            System.out.println("The integer value is: " + number);
+	        } catch (NumberFormatException e) {
+	            
+	            System.out.println("The input is not a valid integer. Please ensure you enter only numeric characters and the number is within the integer range.");
+	        } finally {
+	          
+	            scanner.close();
+	        }
+	    }
+	
+}
